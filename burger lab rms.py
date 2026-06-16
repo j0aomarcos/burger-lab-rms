@@ -1,28 +1,56 @@
 #burguer-lab-rms-v2
-#Nota de Atualizações: alterada a ordem de serviços, antes era : 'cadastrar,excluir,alterar e procurar', agora está na ordem do acrônimo 'CRUD'.
-#Todos os CRUD estão funcionais.
-#Adicionei comentários.
-cardapio = {
-    #Codigo: nome, preço, disponibilidade
-    '1111':['Hamburguer','R$15,00','dísponivel'],
-    '2222':['pizza','R$50,00','dísponivel'],
-    '3333':['filé a parmegiano','R$30,00','disponivel'],
-    '4444':['Camarão empanado','R$60,00','disponivel']
-}
-clientes = {
+#Nota de Atualizações: manipulação e criação de arquivos externos.
+import pickle
+cardapio = {}
+try:
+    arquivo_cardapio = open('cardapio.dat','rb')
+    cardapio = pickle.load(arquivo_cardapio)
+    arquivo_cardapio.close()
+except:
+    cardapio = {
+        #Codigo: nome, preço, disponibilidade
+        '1111':['Hamburguer',15,'dísponivel'],
+        '2222':['pizza',30,'dísponivel'],
+        '3333':['filé a parmegiano',45,'disponivel'],
+        '4444':['Camarão empanado',60,'disponivel']
+    }
+    arquivo_cardapio = open('cardapio.dat','wb')
+    pickle.dump(cardapio, arquivo_cardapio)
+    arquivo_cardapio.close()
+clientes = {}
+try:
+    arquivo_clientes = open('clientes.dat','rb')
+    clientes = pickle.load(arquivo_clientes)
+    arquivo_clientes.close()
+except:
+    clientes = {
     #ID: nome, email, número
     '11111':['João Marcos','joaozinhos@gmai.com','4002-8922'],
     '22222':['Matheus vinolla','matheuszinho@gmail.com','6767-6767'],
     '33333':['Ruan Pablo','ruanzinho@gmail.com','4242-4242'],
     '44444':['Flavius da Luz','flaviuszinho@gmail.com','1234-5678']
-}
-pedidos = {
-    #número do pedido: item, hora do pedido, quantidade
-    '0001': ['Hámburguer', '19:20', '01'],
-    '0002': ['pizza','20:30','02'],
-    '0003': ['filé','21:40','03'],
-    '0004': ['camarão,','22:50','04']
-}
+    }
+    arquivo_clientes = open('clientes.dat','wb')
+    pickle.dump(clientes, arquivo_clientes)
+    arquivo_clientes.close()
+
+pedidos = {}
+try:
+    arquivo_pedidos = open('pedidos.dat','rb')
+    clientes = pickle.load(arquivo_pedidos)
+    arquivo_pedidos.close()
+except:
+    pedidos = {
+    #número do pedido: codigo do item, hora do pedido, quantidade
+    '0001': ['1111', '19:20', '1'],
+    '0002': ['2222','20:30','2'],
+    '0003': ['3333','21:40','3'],
+    '0004': ['4444,','22:50','4']
+    }
+    arquivo_pedidos = open('pedidos.dat','wb')
+    pickle.dump(pedidos,arquivo_pedidos)
+    arquivo_pedidos.close()
+
 
 resp = ''
 def limpar_terminal():
@@ -425,6 +453,21 @@ while resp != '0':
         print("############################################")
         print()
         input("Tecle <ENTER> para continuar...")
+
+arquivo_cardapio = open('cardapio.dat','wb')
+pickle.dump(cardapio, arquivo_cardapio)
+arquivo_cardapio.close()
+
+arquivo_clientes = open('clientes.dat','wb')
+pickle.dump(clientes, arquivo_clientes)
+arquivo_clientes.close()
+
+arquivo_pedidos = open('pedidos.dat','wb')
+pickle.dump(pedidos,arquivo_pedidos)
+arquivo_pedidos.close()
+
+
+
     
     
 
