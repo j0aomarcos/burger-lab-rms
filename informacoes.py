@@ -1,0 +1,16 @@
+from uteis import *
+def menu_infor():
+    limpar_terminal()
+    titulo_reustarante()
+    print("================================================")
+    print(f"      ⚙️ Você está no Módulo Informações ")
+    print("================================================")
+    print("================================================================================================")
+    print("  Projeto de Gestão de um restaurante para a máteria de Algoritmos e Lógica de Programação")
+    print("=============lecionada pelo professor Flavius da Luz Gorgonio===================================")
+    print("===================(desenvolvido por: João Marcos Santos Soares)================================")
+    print("================================================================================================")
+    print("===================  Licença Pública Geral GNU   ===============================================")
+    print("===================  www.gnu.org/licenses/gpl.html =============================================")
+    print()
+    input("Tecle <ENTER> para continuar...")
