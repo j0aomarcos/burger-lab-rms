@@ -6,8 +6,8 @@ from pedidos import *
 from externo import *
 from validacao import *
 from uteis import *
+from funcoes_relatorios import *
 import pickle
-
 cardapio = recup_cardapio()
 clientes = recup_clientes()
 pedidos = recup_pedidos()

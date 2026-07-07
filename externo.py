@@ -26,7 +26,7 @@ def recup_clientes():
         arquivo_clientes.close()
     except:
         clientes = {
-        #ID: nome, email, número
+        #ID: nome, email, número, ativo ou não
         '11111':['João Marcos','joaozinhos@gmai.com','4002-8922',True],
         '22222':['Matheus vinolla','matheuszinho@gmail.com','6767-6767',True],
         '33333':['Ruan Pablo','ruanzinho@gmail.com','4242-4242',True],
@@ -45,11 +45,11 @@ def recup_pedidos():
         arquivo_pedidos.close()
     except:
         pedidos = {
-        #número do pedido: codigo do item, hora do pedidoo, cliente
-        '0001': ['1111', '19:20', '1',True],
-        '0002': ['2222','20:30','2',True],
-        '0003': ['3333','21:40','3',True],
-        '0004': ['4444,','22:50','4',True]
+        #número do pedido: codigo do item, ID do cliente, data , se está ativo ou não
+        '0001': ['1111', '11111', '20/08/2026',True],
+        '0002': ['2222','22222','21/09/2026',True],
+        '0003': ['3333','33333','22/10/2026',True],
+        '0004': ['4444','44444','23/11/2026',True]
         }
         arquivo_pedidos = open('pedidos.dat','wb')
         pickle.dump(pedidos,arquivo_pedidos)
@@ -68,8 +68,5 @@ def salvar_pedidos(pedidos):
     arquivo_pedidos = open('pedidos.dat','wb')
     pickle.dump(pedidos,arquivo_pedidos)
     arquivo_pedidos.close()
-
-
-
 
 

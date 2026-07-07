@@ -59,7 +59,7 @@ def menu_cardapio(cardapio):
             print("================================================")
             print()
             busca = input("Digite o código ou o nome do prato para buscá-lo: ").strip()
-            if busca in cardapio:
+            if busca in cardapio and cardapio[busca][2] == True:
                 print("🍽️ Nome do prato     :", cardapio[busca][0])
                 print("💵 Preço do prato    :", cardapio[busca][1])
                 print("✅ Disponibilidade  :", 'disponivel')
@@ -69,17 +69,14 @@ def menu_cardapio(cardapio):
                     pratos_minusculo = infos[0].lower()
                     nomes_no_cardapio.append(pratos_minusculo)
                 if busca.lower() in nomes_no_cardapio:
-                    # Se o nome existe, rodamos o laço para exibir os dados daquele prato específico
                     for codigo, infos in cardapio.items():
                         if infos[0].lower() == busca.lower():
-                            print("🍽️ Nome do prato     :", infos[0])
-                            print("💵 Preço do prato    :", infos[1])
                             if infos[2] == True:
-                                print("✅ Disponibilidade  :", 'disponivel')
-                            else:
-                                print('disponibilidade: indisponivel')
+                                print("🍽️ Nome do prato     :", infos[0])
+                                print("💵 Preço do prato    :", infos[1])
+                                print("✅ Disponibilidade  :", 'disponivel')                             
                 else:
-                    print('Prato não encontrado por código ou nome.')
+                    print('Prato não encontrado por código ou nome ou o prato está indisponivel.')
             print()
             input("Tecle <ENTER> para continuar...")
         if resp2 == '3':
@@ -104,6 +101,7 @@ def menu_cardapio(cardapio):
                             if infos[0].lower() == alterar_prato.lower():
                                 codigo_nome = codigos
             if codigo_nome is not None:
+                print('antigas informações: ')
                 print("🍽️ Nome do prato     :", cardapio[codigo_nome][0])
                 print("💵 Preço do prato    :", cardapio[codigo_nome][1])
                 if cardapio[codigo_nome][2] == True:
@@ -128,7 +126,7 @@ def menu_cardapio(cardapio):
                 if cardapio[codigo_nome][2] == True:
                     print('disponibilidade: disponivel')
                 else:
-                    print('disponibilidade: indisponivel')
+                    print('disponibilidade: inativo')
             else:
                 print('prato não encontrado.')
             input("Tecle <ENTER> para continuar...")

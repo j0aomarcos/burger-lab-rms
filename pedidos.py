@@ -20,14 +20,15 @@ def menu_pedidos(pedidos):
             print(f"        📝 cadastre um novo pedido! ")
             print("================================================")
             print()
-            pedido_nome = input("🧾 digite o nome do item: ")
+            pedido_prato = input("🧾 digite o código do item: ")
             print()
-            pedido_hora = input("🕐 digite a hora do pedido: ")
+            pedido_cliente = input("🕐 digite o ID do cliente:  ")
             print()
-            pedido_quantidade = input("🍟 digite a quantidade: ")
+            pedido_data = input("🍟 digite a data: ")
             print()
-            pedido_numero = input("🗃️ digite o número de pedido:  ")
-            pedidos[pedido_numero] = [pedido_nome, pedido_hora , pedido_quantidade ]
+            pedido_estado = input("🗃️ o pedido está disponivel?(S/N):  ")
+            pedido_codigo = input('digite o código do pedido: ')
+            pedidos[pedido_codigo] = [pedido_prato, pedido_cliente , pedido_data, pedido_estado ]
             print()
             print(f'pedidos: {pedidos}')  #verificar se entrou ou não no dicionario.
             print('pedidos registrado com sucesso!')

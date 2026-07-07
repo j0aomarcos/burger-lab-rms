@@ -16,13 +16,13 @@ def validacao_codigo(codigo):
 def validacao_ID(codigo):
     codigo = codigo.strip()
     if not codigo:
-        print("Erro: O código não pode ser vazio.")
+        print("Erro: O ID não pode ser vazio.")
         return False
     if not codigo.isdigit():
-        print("Erro: O código deve conter apenas números.")
+        print("Erro: O ID deve conter apenas números.")
         return False
     if len(codigo) != 5:
-        print(f"Erro: O código deve ter exatamente 5 dígitos.")
+        print(f"Erro: O ID deve ter exatamente 5 dígitos.")
         return False
     return True
 
@@ -50,4 +50,26 @@ def validar_preco(preco):
             return preco
         except:
             preco = input("Preço Inválido, digite novamente: ")
-    
+
+def validar_fone(telefone):
+    apenas_numeros = ""
+    # Passamos por cada letra/caractere do telefone digitado
+    for caractere in telefone:
+        # Se o caractere atual for um número de 0 a 9...
+        if caractere.isdigit():
+            # ...nós o guardamos na nossa variável limpa
+            apenas_numeros = apenas_numeros + caractere
+    if len(apenas_numeros) != 11:
+        return False
+    ddd = apenas_numeros[0]+apenas_numeros[1]
+    ddd_validos = ["11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24", "27", "28", "31", "32", "33", "34", "35", "37", "38", "41", "42", "43", "44", "45", "46", "47", "48", "49", "51", "53", "54", "55", "61", "62", "63", "64", "65", "66", "67", "68", "69", "71", "73", "74", "75", "77", "79", "81", "82", "83", "84", "85", "86", "87", "88", "89", "91", "92", "93", "94", "95", "96", "97", "98", "99"]
+    if ddd not in ddd_validos:
+        return False
+    if apenas_numeros[2] !='9':
+        return False
+    return True
+
+def completar_email(usuario):
+    email_completo = f"{usuario}@gmail.com"
+    return email_completo
+
