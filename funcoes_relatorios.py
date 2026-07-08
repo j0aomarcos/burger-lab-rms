@@ -26,7 +26,6 @@ def relatorio_cardapio(cardapio):
         
         disponivel = "Disponível" if dados[2] else "Indisponível"
         
-        # Correção da F-String: Mudamos para >9.2f para alinhar os centavos bonitinho à direita
         print(f"{codigo_item:<8} | {nome_item:<25} | R$ {preco:>9.2f} | {disponivel:<15}")
     print()
 
