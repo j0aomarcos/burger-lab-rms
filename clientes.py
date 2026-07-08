@@ -26,8 +26,7 @@ def menu_clientes():
             cliente_nome = input("👤 digite o nome do cliente: ")
             print()
             validade_fone = False
-            cliente_fone = ''
-            while validade_fone == False:
+            while validade_fone is False:
                 cliente_fone = input('digite seu número com DDD: ')
                 if validar_fone(cliente_fone):
                     validade_fone = True
@@ -38,7 +37,6 @@ def menu_clientes():
             cliente_email = completar_email(cliente_email)
             print()
             validade_id = False
-            cliente_ID = ''
             while validade_id == False:
                 cliente_ID = input("📞 digite o ID do cliente:  ")
                 if validacao_ID(cliente_ID):
@@ -135,7 +133,11 @@ def menu_clientes():
                 print(f'nome: {clientes[id_nome][0]}  ')
                 print(f'E-mail: {clientes[id_nome][1]}  ')
                 print(f"telefone: {clientes[id_nome][2]}  ")
-                print(f"estado do cliente: {clientes[id_nome][3]} ")
+                if alterar_disponibilidade == True:
+                     print(f"estado do cliente: disponivel ")
+                else:
+                     print(f"estado do cliente: indisponivel ")
+
                 print('alterado com sucesso!')
                 salvar_clientes(clientes)
             input("Tecle <ENTER> para continuar...")

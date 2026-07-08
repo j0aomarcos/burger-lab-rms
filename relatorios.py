@@ -21,13 +21,13 @@ def menu_relatorios():
                 print("  [0] sair")
                 resp2 = input("Escolha sua opção: ")
                 if resp2 == '1':
-                        relatorio_cardapio(cardapio)
+                        relatorio_cardapio()
                         input("Tecle <ENTER> para continuar...")
                 elif resp2 == '2':
-                        relatorio_clientes(clientes)
+                        relatorio_clientes()
                         input("Tecle <ENTER> para continuar...")
                 elif resp2 == '3':
-                        relatorio_pedidos(pedidos,cardapio,clientes)
+                        relatorio_pedidos()
                         input("Tecle <ENTER> para continuar...")
                 elif resp2 == '4':
                         resp3 = ''
@@ -42,23 +42,23 @@ def menu_relatorios():
                                 if resp3 == '1':
                                         escolha = input('escolha entre itens ativos(1) ou inativos(0): ')
                                         if escolha == '1':
-                                                relatorio_cardapio_ativos(cardapio)
+                                                relatorio_cardapio_ativos()
                                         else:
-                                                cardapio_inativos(cardapio)
+                                                cardapio_inativos()
                                         input("Tecle <ENTER> para continuar...")
                                 elif resp3 == '2':
                                         escolha = input('escolha entre clientes ativos(1) ou inativos(0): ')
                                         if escolha == '1':
-                                                relatorio_clientes_ativos(clientes)
+                                                relatorio_clientes_ativos()
                                         else:
-                                                clientes_inativos(clientes)
+                                                clientes_inativos()
                                         input("Tecle <ENTER> para continuar...")
                                 elif resp3 == '3':
                                         escolha = input('escolha entre pedidos ativos(1) ou inativos(0): ')
                                         if escolha == '1':
-                                                relatorio_pedidos_ativos(pedidos,cardapio,clientes)
+                                                relatorio_pedidos_ativos()
                                         else:
-                                                pedidos_inativos(pedidos,cardapio,clientes)
+                                                pedidos_inativos()
                                         input("Tecle <ENTER> para continuar...")
                 elif resp2 == '5':
                         escolha = ''
@@ -70,7 +70,7 @@ def menu_relatorios():
                                 print('[0] sair')
                                 escolha = input('qual opção deseja executar? ')
                                 if escolha == '1':
-                                        relatorio_cardapio_por_preco(cardapio)
+                                        relatorio_cardapio_por_preco()
                                         input("Tecle <ENTER> para continuar...")
                 elif resp2 == '6':
                         print('só pra ficar bonitinho!')

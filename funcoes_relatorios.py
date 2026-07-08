@@ -1,81 +1,80 @@
-def relatorio_clientes(clientes):
-    print(f"{'2. CLIENTES CADASTRADOS':^75}")
+from externo import *
+def relatorio_clientes():
+    clientes = recup_clientes()
     print("-" * 75)
-    print(f"{'ID':<7} | {'Nome':<20} | {'E-mail':<25} | {'Status':<10}")
+    print(f"{'2. CLIENTES CADASTRADOS':^75}")
     print("-" * 75)
     for id_cliente, dados in clientes.items():
         nome = dados[0]
         email = dados[1]
         status = "Ativo" if dados[3] else "Inativo"
-        print(f"{id_cliente:<7} | {nome:<20} | {email:<25} | {status:<10}")
+        print(f'nome: {nome}')
+        print(f'e-mail: {email}')
+        print(f'status: {status}')
+        print()
     print()
 
 
-def relatorio_cardapio(cardapio):
+def relatorio_cardapio():
+    cardapio = recup_cardapio()
     print("-" * 75)
     print(f"{'1. ITENS DO CARDÁPIO':^75}")
-    print("-" * 75)
-    print(f"{'Código':<8} | {'Nome do Item':<25} | {'Preço':<12} | {'Disponibilidade':<15}")
     print("-" * 75)
     for codigo_item, dados in cardapio.items():
         nome_item = dados[0]
         preco_bruto = dados[1]
-        if isinstance(preco_bruto, str):
-            preco_bruto = preco_bruto.replace(',', '.')
-        preco = float(preco_bruto) 
-        
         disponivel = "Disponível" if dados[2] else "Indisponível"
-        
-        print(f"{codigo_item:<8} | {nome_item:<25} | R$ {preco:>9.2f} | {disponivel:<15}")
+        print(f'nome: {nome_item}')
+        print(f'preço:{preco_bruto}')
+        print(f'disponibilidade: {disponivel}')
     print()
 
-def relatorio_pedidos(pedidos,cardapio,clientes):
+def relatorio_pedidos():
+    pedidos = recup_pedidos()
+    clientes = recup_clientes()
+    cardapio = recup_cardapio()
     print("-" * 75)
     print(f"{'3. HISTÓRICO DE PEDIDOS':^75}")
-    print("-" * 75)
-    print(f"{'Nº Ped':<7} | {'Item (Cód)':<18} | {'Cliente (ID)':<22} | {'Data':<12} | {'Status':<8}")
     print("-" * 75)
     for num_pedido, dados in pedidos.items():
         cod_item = dados[0]  
         id_cliente = dados[1]           
         data = dados[2]
         status_pedido = "Ativo" if dados[3] else "Cancelado"
-        
         nome_item = cardapio[cod_item][0] 
-        
         nome_cliente = clientes[id_cliente][0]
-        
-        item_formatado = f"{nome_item[:10]} ({cod_item})"
-        cliente_formatado = f"{nome_cliente[:12]} ({id_cliente})"
-        
-        print(f"{num_pedido:<7} | {item_formatado:<18} | {cliente_formatado:<22} | {data:<12} | {status_pedido:<8}")
+        print(f'nome do item: {nome_item}')
+        print()
+        print(f'nome do cliente: {nome_cliente}')
+        print()
+        print(f'status do pedido: {status_pedido}')
+    print()
 
-def relatorio_clientes_ativos(clientes):
+def relatorio_clientes_ativos():
+    clientes = recup_clientes()
     print("-" * 75)
     print(f"{'CLIENTES ATIVOS':^75}")
     print("-" * 75)
-    print(f"{'ID':<7} | {'Nome':<20} | {'E-mail':<25}")
-    print("-" * 75)
     for id_clie, dados in clientes.items():
         if dados[3] ==True: 
-            print(f"{id_clie:<7} | {dados[0]:<20} | {dados[1]:<25}")
+            print(f'ID do cliente: {id_clie} | email: {dados[0]} | número: {dados[1]}')
 
 
-def relatorio_cardapio_ativos(cardapio):
+def relatorio_cardapio_ativos():
+    cardapio = recup_cardapio()
     print("-" * 75)
     print(f"{'ITENS DISPONÍVEIS NO CARDÁPIO':^75}")
     print("-" * 75)
-    print(f"{'Código':<8} | {'Nome do Item':<25} | {'Preço':<12}")
-    print("-" * 75)
     for cod_item, dados in cardapio.items():
         if dados[2] == True: 
-            print(f"{cod_item:<8} | {dados[0]:<25} | R$ {dados[1]:<9.2f}")
+            print(f"còdigo do item: {cod_item} | nome: {dados[0]} | valor: R$ {dados[1]}")
 
-def relatorio_pedidos_ativos(pedidos,cardapio,clientes):
+def relatorio_pedidos_ativos():
+    pedidos = recup_pedidos()
+    cardapio = recup_cardapio()
+    clientes = recup_clientes()
     print("-" * 75)
     print(f"{'PEDIDOS EM ANDAMENTO / ATIVOS':^75}")
-    print("-" * 75)
-    print(f"{'Nº Ped':<7} | {'Item (Cód)':<18} | {'Cliente (ID)':<22} | {'Data':<12}")
     print("-" * 75)
     for num_ped, dados in pedidos.items():
         if dados[3] == True: 
@@ -84,36 +83,35 @@ def relatorio_pedidos_ativos(pedidos,cardapio,clientes):
             data = dados[2]
             nome_item = cardapio[cod_item][0] 
             nome_clie = clientes[id_clie][0] 
-            print(f"{num_ped:<7} | {nome_item[:10]} ({cod_item}) | {nome_clie[:12]} ({id_clie}) | {data:<12}")
+            print(f"número do pedido {num_ped} | nome do item: {nome_item[:10]} | nome do cliente: {nome_clie[:12]} | data: {data}")
 
 
-def clientes_inativos(clientes):
+def clientes_inativos():
+    clientes = recup_clientes()
     print("-" * 75)
     print(f"{'CLIENTES INATIVOS':^75}")
     print("-" * 75)
-    print(f"{'ID':<7} | {'Nome':<20} | {'E-mail':<25}")
-    print("-" * 75)
     for id_clie, dados in clientes.items():
         if not dados[3]: 
-            print(f"{id_clie:<7} | {dados[0]:<20} | {dados[1]:<25}")
+            print(f" iD: {id_clie:} | nome: {dados[0]} |e email: {dados[1]}")
     print()
 
-def cardapio_inativos(cardapio):
+def cardapio_inativos():
+    cardapio = recup_cardapio()
     print("-" * 75)
     print(f"{'ITENS INDISPONÍVEIS NO CARDÁPIO':^75}")
     print("-" * 75)
-    print(f"{'Código':<8} | {'Nome do Item':<25} | {'Preço':<12}")
-    print("-" * 75)
     for cod_item, dados in cardapio.items():
         if not dados[2]: 
-            print(f"{cod_item:<8} | {dados[0]:<25} | R$ {dados[1]:<9.2f}")
+            print(f"código do item: {cod_item} | nome do item: {dados[0]} | preço do item R$ {dados[1]}")
     print()
 
-def pedidos_inativos(pedidos,cardapio,clientes):
+def pedidos_inativos(pedidos,clientes):
+    cardapio = recup_cardapio()
+    clientes = recup_clientes()
+    pedidos = recup_pedidos()
     print("-" * 75)
     print(f"{'PEDIDOS CANCELADOS':^75}")
-    print("-" * 75)
-    print(f"{'Nº Ped':<7} | {'Item (Cód)':<18} | {'Cliente (ID)':<22} | {'Data':<12}")
     print("-" * 75)
     for num_ped, dados in pedidos.items():
         if not dados[3]:
@@ -124,7 +122,7 @@ def pedidos_inativos(pedidos,cardapio,clientes):
             nome_item = cardapio[cod_item][0] 
             nome_clie = clientes[id_clie][0] 
             
-            print(f"{num_ped:<7} | {nome_item[:10]} ({cod_item}) | {nome_clie[:12]} ({id_clie}) | {data:<12}")
+            print(f"número do pedido: :{num_ped} | nome do item {nome_item} ({cod_item}) | nome do cliente {nome_clie}  | data: {data:}")
 
 
 
@@ -133,20 +131,16 @@ def pegar_preco(item):
     preco = dados_do_prato[1]
     return preco
 
-def relatorio_cardapio_por_preco(cardapio):
+def relatorio_cardapio_por_preco():
+    cardapio = recup_cardapio
     print("=" * 55)
     print(f"{'CARDÁPIO: DO MAIS CARO PRO MAIS BARATO':^55}")
     print("=" * 55)
-    print(f"{'Código':<8} | {'Nome do Item':<25} | {'Preço':<12}")
-    print("-" * 55)
-    
-    # O sorted chama a função pegar_preco para cada item do cardápio
     cardapio_ordenado = sorted(cardapio.items(), key=pegar_preco, reverse=True)
-    
     for codigo_item, dados in cardapio_ordenado:
         nome_item = dados[0]
         preco = dados[1]
-        print(f"{codigo_item:<8} | {nome_item:<25} | R$ {preco:<9.2f}")
+        print(f"{codigo_item} | {nome_item} | R$ {preco}")
         
     print("=" * 55)
 

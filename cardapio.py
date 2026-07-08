@@ -30,12 +30,11 @@ def menu_cardapio():
             print()
             validade_do_preco = False
             while validade_do_preco is False:
-                preco_prato = float(input("💵 digite o preço do prato: "))
+                preco_prato = input("💵 digite o preço do prato: ")
                 if validar_preco(preco_prato):
-                    validade_do_preco = True
+                    validade_do_preco = False
                 else:
                     print('tente de novo')
-            print()
             print()
             codigo_prato = ''
             validade = False
@@ -113,7 +112,14 @@ def menu_cardapio():
                     print("✅ Disponibilidade  :", 'indisponivel')
                 print('digite as modificações que deseje fazer: ')
                 alterar_nome1 = input('digite o novo nome: ')
-                alterar_preco = input('digite o novo preço: ')
+                alterar_preco_novo = False
+                while alterar_preco_novo is False:
+                    alterar_preco = input('digite o novo preço: ')
+                    if validar_preco(alterar_preco):
+                        alterar_preco_novo is True
+                    else:
+                        print('tente de novo: ')
+
                 alterar_disponibilidade = input('o prato está disponivel: ')
                 if alterar_disponibilidade.lower() == 's' or alterar_disponibilidade.lower() == 'sim':
                     disponibilidade = True

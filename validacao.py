@@ -44,7 +44,7 @@ def validar_preco(valor):
             valor = float(valor)
             return valor
         except:
-            valor = input('\033[31mResposta Inválida, tente novamente >>> \033[m')
+            valor = input('Resposta Inválida, tente novamente: ')
 
 def validar_fone(telefone):
     apenas_numeros = ""
