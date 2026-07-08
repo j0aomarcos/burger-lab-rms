@@ -38,17 +38,13 @@ def validacao_pedido(codigo):
         return False
     return True
                 
-
-def validar_preco(preco):
+def validar_preco(valor):
     while True:
         try:
-            preco = str(preco)
-            preco = preco.replace(","    ,   ".")
-
-            preco = float(preco)
-            return preco
+            valor = float(valor)
+            return valor
         except:
-            preco = input("Preço Inválido, digite novamente: ")
+            valor = input('\033[31mResposta Inválida, tente novamente >>> \033[m')
 
 def validar_fone(telefone):
     apenas_numeros = ""

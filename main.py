@@ -6,7 +6,7 @@ from pedidos import *
 from externo import *
 from validacao import *
 from uteis import *
-from datetime import datetime, timedelta
+from datetime import datetime
 from funcoes_relatorios import *
 import pickle
 cardapio = recup_cardapio()
@@ -32,11 +32,11 @@ while opcao_menu != '0':
     print(" [0] ❌  sair do sistema")
     opcao_menu = input("escolha uma das opções: ")
     if opcao_menu == '1':
-        menu_cardapio(cardapio)
+        menu_cardapio()
     elif opcao_menu == '2':
-        menu_clientes(clientes)
+        menu_clientes()
     elif opcao_menu == '3':
-        menu_pedidos(pedidos,cardapio,clientes)   
+        menu_pedidos()   
     elif opcao_menu == '4':
         menu_relatorios()
     elif opcao_menu == '5':

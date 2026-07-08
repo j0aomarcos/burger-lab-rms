@@ -1,6 +1,10 @@
 from uteis import *
-from validacao import validacao_codigo,validar_preco
-def menu_cardapio(cardapio):
+from validacao import *
+from externo import *
+def printar_cardapio(cardapio):
+    print(cardapio)
+def menu_cardapio():
+    cardapio = recup_cardapio()
     resp2 = ''
     while resp2 !='0':
         limpar_terminal()
@@ -24,8 +28,13 @@ def menu_cardapio(cardapio):
             print()
             nome_prato = input("🍽️ digite o nome do prato: ")
             print()
-            preco_prato = input("💵 digite o preço do prato: ")
-            validar_preco(preco_prato)
+            validade_do_preco = False
+            while validade_do_preco is False:
+                preco_prato = float(input("💵 digite o preço do prato: "))
+                if validar_preco(preco_prato):
+                    validade_do_preco = True
+                else:
+                    print('tente de novo')
             print()
             print()
             codigo_prato = ''
@@ -36,10 +45,13 @@ def menu_cardapio(cardapio):
                 if not validade:
                     print('tente novamente colocar o código')
                 cardapio[codigo_prato] = [nome_prato,preco_prato,True]
+                salvar_cardapio(cardapio)
                 print()
                 print(f'nome do prato: {cardapio[codigo_prato][0]}')
                 print(f'preço do prato: {cardapio[codigo_prato][1]}')
                 print('disponibilidade do prato: disponivel')
+                print()
+                printar_cardapio(cardapio)
             print()
             input("Tecle <ENTER> para continuar...")
         if resp2 == '2':
@@ -78,9 +90,9 @@ def menu_cardapio(cardapio):
             print("================================================")
             print()
             alterar_prato = input("🔢 digite o código do prato ou o nome: ").strip()
-            codigo_nome = False
+            codigo_nome = None
             if alterar_prato in cardapio:
-                codigo_nome == alterar_prato
+                codigo_nome = alterar_prato
             else:
                 nomes_cardapio = []
                 for infos in cardapio.values():
@@ -91,7 +103,7 @@ def menu_cardapio(cardapio):
                         for codigos, infos in cardapio.items():
                             if infos[0].lower() == alterar_prato.lower():
                                 codigo_nome = codigos
-            if codigo_nome is True:
+            if codigo_nome is not None:
                 print('antigas informações: ')
                 print("🍽️ Nome do prato     :", cardapio[codigo_nome][0])
                 print("💵 Preço do prato    :", cardapio[codigo_nome][1])
@@ -102,13 +114,13 @@ def menu_cardapio(cardapio):
                 print('digite as modificações que deseje fazer: ')
                 alterar_nome1 = input('digite o novo nome: ')
                 alterar_preco = input('digite o novo preço: ')
-                validar_preco(alterar_preco)
                 alterar_disponibilidade = input('o prato está disponivel: ')
                 if alterar_disponibilidade.lower() == 's' or alterar_disponibilidade.lower() == 'sim':
                     disponibilidade = True
                 else:
                     disponibilidade = False
                 cardapio[codigo_nome] = [alterar_nome1,alterar_preco,disponibilidade]
+                salvar_cardapio(cardapio)
                 print()
                 print('prato alterado com sucesso')
                 print(f'verifique a alteração:')
@@ -118,8 +130,10 @@ def menu_cardapio(cardapio):
                     print('disponibilidade: disponivel')
                 else:
                     print('disponibilidade: inativo')
+                cardapio = recup_cardapio()
             else:
                 print('prato não encontrado.')
+
             input("Tecle <ENTER> para continuar...")
         if resp2 == '4':
             limpar_terminal()
@@ -138,6 +152,7 @@ def menu_cardapio(cardapio):
                     confirmar = input('aperte "s" para confirmar a exclusão:  ')
                     if confirmar.lower() == "s":
                         cardapio[excluir_prato][2] = False
+                        salvar_cardapio(cardapio)
                         print('prato excluido!')
                         print()
                         print(f'nome: {cardapio[excluir_prato][0]}')
@@ -152,3 +167,5 @@ def menu_cardapio(cardapio):
                 print('prato não encontrado!')
             print()
             input("Tecle <ENTER> para continuar...")
+            salvar_cardapio(cardapio)
+

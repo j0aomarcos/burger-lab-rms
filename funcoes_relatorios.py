@@ -17,12 +17,17 @@ def relatorio_cardapio(cardapio):
     print("-" * 75)
     print(f"{'Código':<8} | {'Nome do Item':<25} | {'Preço':<12} | {'Disponibilidade':<15}")
     print("-" * 75)
-    
     for codigo_item, dados in cardapio.items():
         nome_item = dados[0]
-        preco = dados[1]
+        preco_bruto = dados[1]
+        if isinstance(preco_bruto, str):
+            preco_bruto = preco_bruto.replace(',', '.')
+        preco = float(preco_bruto) 
+        
         disponivel = "Disponível" if dados[2] else "Indisponível"
-        print(f"{codigo_item:<8} | {nome_item:<25} | R$ {preco:<9.2f} | {disponivel:<15}")
+        
+        # Correção da F-String: Mudamos para >9.2f para alinhar os centavos bonitinho à direita
+        print(f"{codigo_item:<8} | {nome_item:<25} | R$ {preco:>9.2f} | {disponivel:<15}")
     print()
 
 def relatorio_pedidos(pedidos,cardapio,clientes):

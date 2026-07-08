@@ -1,6 +1,11 @@
 from uteis import *
 from validacao import *
-def menu_pedidos(pedidos,cardapio, clientes):
+from externo import *
+
+def menu_pedidos():
+    clientes = recup_clientes()
+    cardapio = recup_cardapio()
+    pedidos = recup_pedidos()
     resp4 = ''
     while resp4 != '0':
         limpar_terminal()
@@ -45,6 +50,7 @@ def menu_pedidos(pedidos,cardapio, clientes):
             print()
             pedido_codigo = input('digite o código do pedido: ')
             pedidos[pedido_codigo] = [pedido_prato, pedido_cliente , pedido_data, True ]
+            salvar_pedidos(pedidos)
             print()
             nome_item = cardapio[pedido_prato][0] 
             nome_clie = clientes[pedido_cliente][0]
@@ -139,6 +145,7 @@ def menu_pedidos(pedidos,cardapio, clientes):
                 print(f'estado do pedido: {estado_atual}')
             else:
                 print('pedido não encontrado!')
+            salvar_pedidos(pedidos)
             input("Tecle <ENTER> para continuar...")
         elif resp4 == '4':
             limpar_terminal()
@@ -175,5 +182,7 @@ def menu_pedidos(pedidos,cardapio, clientes):
                         print('exclusão cancelada!')
             else:
                 print('pedido não achado, tente novamente')
+            salvar_pedidos(pedidos)
             input("Tecle <ENTER> para continuar...")
-        print()
+
+        

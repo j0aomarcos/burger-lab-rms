@@ -1,6 +1,8 @@
 from uteis import *
 from validacao import *
-def menu_clientes(clientes):
+from externo import *
+def menu_clientes():
+    clientes = recup_clientes()
     resp3 = ''
     while resp3 !='0':
         limpar_terminal()
@@ -51,6 +53,7 @@ def menu_clientes(clientes):
             print('estado do cliente: ativo')
             print('cliente registrado com sucesso!')
             print()
+            salvar_clientes(clientes)
             input("Tecle <ENTER> para continuar...")
         elif resp3 == '2':
             limpar_terminal()
@@ -90,7 +93,7 @@ def menu_clientes(clientes):
             print("================================================")
             print()
             alterar_cliente = input("📇 digite o ID ou o nome do cliente: ")
-            id_nome = False
+            id_nome = None
             if alterar_cliente in clientes:
                 id_nome = alterar_cliente
             else:
@@ -102,7 +105,7 @@ def menu_clientes(clientes):
                     for codigo, infos in clientes.items():
                         if infos[0].lower() == alterar_cliente.lower():
                             id_nome = codigo
-            if id_nome is True:
+            if id_nome is not None:
                 print('antigas informações: ')
                 print('nome do cliente:', clientes[id_nome][0])
                 print('E-email do cliente:', clientes[id_nome][1])
@@ -134,6 +137,7 @@ def menu_clientes(clientes):
                 print(f"telefone: {clientes[id_nome][2]}  ")
                 print(f"estado do cliente: {clientes[id_nome][3]} ")
                 print('alterado com sucesso!')
+                salvar_clientes(clientes)
             input("Tecle <ENTER> para continuar...")
         elif resp3 == '4':
             limpar_terminal()
@@ -162,4 +166,7 @@ def menu_clientes(clientes):
             else:
                 print('cliente não encontrado')
             print()
+            salvar_clientes(clientes)
             input("Tecle <ENTER> para continuar...")
+            salvar_clientes(clientes)
+
