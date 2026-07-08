@@ -41,14 +41,14 @@ def relatorio_pedidos():
         id_cliente = dados[1]           
         data = dados[2]
         status_pedido = "Ativo" if dados[3] else "Cancelado"
-        nome_item = cardapio[cod_item][0] 
-        nome_cliente = clientes[id_cliente][0]
+        if cod_item in cardapio:
+            nome_item = cardapio[cod_item][0] 
+        if id_cliente in clientes:
+            nome_cliente = clientes[id_cliente][0]
         print(f'nome do item: {nome_item}')
-        print()
         print(f'nome do cliente: {nome_cliente}')
-        print()
+        print(f'data: {data}')
         print(f'status do pedido: {status_pedido}')
-    print()
 
 def relatorio_clientes_ativos():
     clientes = recup_clientes()
@@ -106,7 +106,7 @@ def cardapio_inativos():
             print(f"código do item: {cod_item} | nome do item: {dados[0]} | preço do item R$ {dados[1]}")
     print()
 
-def pedidos_inativos(pedidos,clientes):
+def pedidos_inativos():
     cardapio = recup_cardapio()
     clientes = recup_clientes()
     pedidos = recup_pedidos()
@@ -124,23 +124,4 @@ def pedidos_inativos(pedidos,clientes):
             
             print(f"número do pedido: :{num_ped} | nome do item {nome_item} ({cod_item}) | nome do cliente {nome_clie}  | data: {data:}")
 
-
-
-def pegar_preco(item):
-    dados_do_prato = item[1]
-    preco = dados_do_prato[1]
-    return preco
-
-def relatorio_cardapio_por_preco():
-    cardapio = recup_cardapio
-    print("=" * 55)
-    print(f"{'CARDÁPIO: DO MAIS CARO PRO MAIS BARATO':^55}")
-    print("=" * 55)
-    cardapio_ordenado = sorted(cardapio.items(), key=pegar_preco, reverse=True)
-    for codigo_item, dados in cardapio_ordenado:
-        nome_item = dados[0]
-        preco = dados[1]
-        print(f"{codigo_item} | {nome_item} | R$ {preco}")
-        
-    print("=" * 55)
 

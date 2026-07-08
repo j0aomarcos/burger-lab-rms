@@ -8,7 +8,7 @@ def menu_cardapio():
     resp2 = ''
     while resp2 !='0':
         limpar_terminal()
-        titulo_reustarante
+        titulo_reustarante()
         print("================================================")
         print(f"        📜 menu do cardapio ")
         print("================================================")

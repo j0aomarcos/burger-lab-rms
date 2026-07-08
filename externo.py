@@ -41,7 +41,7 @@ def recup_pedidos():
     pedidos = {}
     try:
         arquivo_pedidos = open('pedidos.dat','rb')
-        clientes = pickle.load(arquivo_pedidos)
+        pedidos = pickle.load(arquivo_pedidos)
         arquivo_pedidos.close()
     except:
         pedidos = {
