@@ -46,7 +46,7 @@ def recup_pedidos():
     except:
         pedidos = {
         #número do pedido: codigo do item, ID do cliente, data , se está ativo ou não
-        '0001': ['1111', '11111', '20/08/2026',True],
+        '0001': ['1111', '11111','20/08/2026',True],
         '0002': ['2222','22222','21/09/2026',True],
         '0003': ['3333','33333','22/10/2026',True],
         '0004': ['4444','44444','23/11/2026',True]

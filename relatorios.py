@@ -16,7 +16,8 @@ def menu_relatorios():
                 print("  [2] lista de clientes completa")
                 print("  [3] lista de pedidos completa")
                 print("  [4] lista de relatorios ativos/inativos")
-                print("  [5] pensando")
+                print("  [5] lista de relatorios com filtro")
+                print("  [6] lista de relatorios com filtro e processamento")
                 print("  [0] sair")
                 resp2 = input("Escolha sua opção: ")
                 if resp2 == '1':
@@ -59,6 +60,21 @@ def menu_relatorios():
                                         else:
                                                 pedidos_inativos(pedidos,cardapio,clientes)
                                         input("Tecle <ENTER> para continuar...")
+                elif resp2 == '5':
+                        escolha = ''
+                        while escolha != 0:
+                                limpar_terminal()
+                                print('escolha uma das opções abaixo: ')
+                                print('[1] filtrar pelos valores do cardapio em ordem descrescente')
+                                print('[2] filtrar os pedidos por mês')
+                                print('[0] sair')
+                                escolha = input('qual opção deseja executar? ')
+                                if escolha == '1':
+                                        relatorio_cardapio_por_preco(cardapio)
+                                        input("Tecle <ENTER> para continuar...")
+                elif resp2 == '6':
+                        print('só pra ficar bonitinho!')
+
 
                 
                         

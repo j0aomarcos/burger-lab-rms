@@ -1,3 +1,4 @@
+from datetime import datetime
 def validacao_codigo(codigo):
     codigo = codigo.strip()
     if not codigo:
@@ -11,8 +12,6 @@ def validacao_codigo(codigo):
         return False
     return True
                 
-
-
 def validacao_ID(codigo):
     codigo = codigo.strip()
     if not codigo:
@@ -53,11 +52,8 @@ def validar_preco(preco):
 
 def validar_fone(telefone):
     apenas_numeros = ""
-    # Passamos por cada letra/caractere do telefone digitado
     for caractere in telefone:
-        # Se o caractere atual for um número de 0 a 9...
         if caractere.isdigit():
-            # ...nós o guardamos na nossa variável limpa
             apenas_numeros = apenas_numeros + caractere
     if len(apenas_numeros) != 11:
         return False
@@ -73,3 +69,20 @@ def completar_email(usuario):
     email_completo = f"{usuario}@gmail.com"
     return email_completo
 
+def validar_data(data_texto, formato="%d/%m/%Y"):
+    try:
+        data_objeto = datetime.strptime(data_texto, formato).date()
+    except ValueError:
+        return False  
+    hoje = datetime.now().date()
+    ano_atual = hoje.year
+    
+    if data_objeto < hoje:
+        print("Erro: A data não pode ser no passado!")
+        return False
+        
+    if data_objeto.year != ano_atual:
+        print(f"Erro: A data precisa ser do ano atual ({ano_atual})!")
+        return False
+        
+    return True

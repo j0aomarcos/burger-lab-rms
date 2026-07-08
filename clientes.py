@@ -90,7 +90,7 @@ def menu_clientes(clientes):
             print("================================================")
             print()
             alterar_cliente = input("📇 digite o ID ou o nome do cliente: ")
-            id_nome = None
+            id_nome = False
             if alterar_cliente in clientes:
                 id_nome = alterar_cliente
             else:
@@ -102,7 +102,7 @@ def menu_clientes(clientes):
                     for codigo, infos in clientes.items():
                         if infos[0].lower() == alterar_cliente.lower():
                             id_nome = codigo
-            if id_nome is not None:
+            if id_nome is True:
                 print('antigas informações: ')
                 print('nome do cliente:', clientes[id_nome][0])
                 print('E-email do cliente:', clientes[id_nome][1])

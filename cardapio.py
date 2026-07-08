@@ -27,7 +27,6 @@ def menu_cardapio(cardapio):
             preco_prato = input("💵 digite o preço do prato: ")
             validar_preco(preco_prato)
             print()
-            disponibilidade_prato = input("✅ digite se o prato está disponivel ou não: ")
             print()
             codigo_prato = ''
             validade = False
@@ -36,19 +35,11 @@ def menu_cardapio(cardapio):
                 validade = validacao_codigo(codigo_prato)
                 if not validade:
                     print('tente novamente colocar o código')
-            if validade:
-                if disponibilidade_prato.lower() == 's' or disponibilidade_prato.lower() == 'sim':
-                    disponivel = True
-                else:
-                    disponivel = False
-                cardapio[codigo_prato] = [nome_prato,preco_prato,disponivel]
+                cardapio[codigo_prato] = [nome_prato,preco_prato,True]
                 print()
                 print(f'nome do prato: {cardapio[codigo_prato][0]}')
                 print(f'preço do prato: {cardapio[codigo_prato][1]}')
-                if cardapio[codigo_prato][2] == True:
-                    print('disponibilidade do prato: disponivel')
-                else:
-                    print('disponibilidade: indisponivel')
+                print('disponibilidade do prato: disponivel')
             print()
             input("Tecle <ENTER> para continuar...")
         if resp2 == '2':
@@ -87,7 +78,7 @@ def menu_cardapio(cardapio):
             print("================================================")
             print()
             alterar_prato = input("🔢 digite o código do prato ou o nome: ").strip()
-            codigo_nome = None
+            codigo_nome = False
             if alterar_prato in cardapio:
                 codigo_nome == alterar_prato
             else:
@@ -100,7 +91,7 @@ def menu_cardapio(cardapio):
                         for codigos, infos in cardapio.items():
                             if infos[0].lower() == alterar_prato.lower():
                                 codigo_nome = codigos
-            if codigo_nome is not None:
+            if codigo_nome is True:
                 print('antigas informações: ')
                 print("🍽️ Nome do prato     :", cardapio[codigo_nome][0])
                 print("💵 Preço do prato    :", cardapio[codigo_nome][1])
@@ -138,21 +129,26 @@ def menu_cardapio(cardapio):
             print("================================================")
             print()
             excluir_prato = input("🔢 digite o código do prato: ")
-            if cardapio[excluir_prato][2] == True:
-                print("🍽️ Nome do prato:", cardapio[excluir_prato][0])
-                print("💵 Preço do prato:", cardapio[excluir_prato][1])
-                print("✅ Disponibilidade:",'dísponivel')
-                print()
-                confirmar = input('aperte "s" para confirmar a exclusão:  ')
-                if confirmar.lower() == "s":
-                    cardapio[excluir_prato][2] = False
-                    print('prato excluido!')
+            if excluir_prato in cardapio:
+                if cardapio[excluir_prato][2] == True:
+                    print("🍽️ Nome do prato:", cardapio[excluir_prato][0])
+                    print("💵 Preço do prato:", cardapio[excluir_prato][1])
+                    print("✅ Disponibilidade:",'dísponivel')
                     print()
-                    print(f'cardapio {cardapio}')
+                    confirmar = input('aperte "s" para confirmar a exclusão:  ')
+                    if confirmar.lower() == "s":
+                        cardapio[excluir_prato][2] = False
+                        print('prato excluido!')
+                        print()
+                        print(f'nome: {cardapio[excluir_prato][0]}')
+                        print(f'Preço: {cardapio[excluir_prato][1]}')
+                        print(f'disponibilidade: {cardapio[excluir_prato][2]}')
+                    else:
+                        print('exclusão cancelada!')
+                        input("Tecle <ENTER> para continuar...")
                 else:
-                    print('exclusão cancelada!')
-                    input("Tecle <ENTER> para continuar...")
+                    print('prato não disponivel')
             else:
-                print('prato não disponivel')
+                print('prato não encontrado!')
             print()
             input("Tecle <ENTER> para continuar...")

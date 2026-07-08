@@ -6,17 +6,18 @@ from pedidos import *
 from externo import *
 from validacao import *
 from uteis import *
+from datetime import datetime, timedelta
 from funcoes_relatorios import *
 import pickle
 cardapio = recup_cardapio()
 clientes = recup_clientes()
 pedidos = recup_pedidos()
 
-resp = ''
+opcao_menu = ''
 limpar_terminal()
 titulo_reustarante()
 
-while resp != '0':
+while opcao_menu != '0':
     #menu principal
     limpar_terminal()
     titulo_reustarante()
@@ -29,47 +30,21 @@ while resp != '0':
     print(" [4] 📦  relatório")
     print(" [5] ⚙️  sobre o sistemas")
     print(" [0] ❌  sair do sistema")
-    resp = input("escolha uma das opções: ")
-    if resp == '1':
+    opcao_menu = input("escolha uma das opções: ")
+    if opcao_menu == '1':
         menu_cardapio(cardapio)
-    elif resp == '2':
+    elif opcao_menu == '2':
         menu_clientes(clientes)
-    elif resp == '3':
-        menu_pedidos(pedidos)   
-    elif resp == '4':
+    elif opcao_menu == '3':
+        menu_pedidos(pedidos,cardapio,clientes)   
+    elif opcao_menu == '4':
         menu_relatorios()
-    elif resp == '5':
+    elif opcao_menu == '5':
         menu_infor()
-    elif resp == '0':
-        print('''
- █████╗ ██████╗ ███████╗██╗   ██╗███████╗
-██╔══██╗██╔══██╗██╔════╝██║   ██║██╔════╝
-███████║██║  ██║█████╗  ██║   ██║███████╗
-██╔══██║██║  ██║██╔══╝  ██║   ██║╚════██║
-██║  ██║██████╔╝███████╗╚██████╔╝███████║
-╚═╝  ╚═╝╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝           
-              
-              ''')
-        print()
-        print("############################################")
-        print("#####  Você encerrou o programa, até logo! #")
-        print("############################################")
-        print()
-        input("Tecle <ENTER> para continuar...")
+    elif opcao_menu == '0':
+        adeus()
     else:
-        limpar_terminal()
-        print()
-        print("############################################")
-        print("#####   Você digitou uma opção inválida ####")
-        print("############################################")
-        print("#####                                   ####")
-        print("#####      Retorne ao menu anterior     ####")
-        print("#####         e tente novamente         ####")
-        print("#####                                   ####")
-        print("############################################")
-        print()
-        input("Tecle <ENTER> para continuar...")
-
+        resp_errada()
 salvar_cardapio(cardapio)
 salvar_clientes(clientes)
 salvar_pedidos(pedidos)
